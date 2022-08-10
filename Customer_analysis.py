@@ -3,7 +3,6 @@ import pandas as pd
 import altair as alt
 import numpy as np 
 import pydeck as pdk 
-from vega_datasets import data
 import datetime
 
 # SETTING PAGE CONFIG TO WIDE MODE AND ADDING A TITLE AND FAVICON
