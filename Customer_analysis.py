@@ -98,21 +98,6 @@ def scatter_graph(data, slider, states):
     ).properties(width=400,height=250)
     return chart
 
-"""
-def geo_chart(data, slider, states):
-    df2 = data[(data['order_date'] <= slider[1]) & (data['order_date'] >= slider[0])]
-    df2 = df2.loc[df2['State'].isin(states)]
-    df_group = df2.groupby(['State', 'Longitude', 'Latitude'])['total'].sum()
-    df_grouped = df_group.reset_index()
-    https://opendata.arcgis.com/datasets/bfe6977cfd574c2b894cd67cf6a787c3_2.geojson"https://opendata.arcgis.com/datasets/bfe6977cfd574c2b894cd67cf6a787c3_2.geojson"https://opendata.arcgis.com/datasets/bfe6977cfd574c2b894cd67cf6a787c3_2.geojson"https://opendata.arcgis.com/datasets/bfe6977cfd574c2b894cd67cf6a787c3_2.geojson"https://opendata.arcgis.com/datasets/bfe6977cfd574c2b894cd67cf6a787c3_2.geojson"
-    chart = alt.Chart(states).mark_geoshape().encode(
-        color='total:Q'
-        ).transform_lookup(
-            lookup='state',from_=alt.LookupData(df_grouped, 'State', list(df_grouped.columns))
-            ).project(type='albersUsa'
-            ).properties(width=400,height=250)
-    return chart
-"""
 
 def age_band(data, slider, states):
     bins = [0, 20, 30, 40, 50, 60, 70, np.inf]
@@ -131,7 +116,7 @@ def age_band(data, slider, states):
     return chart
 
 
-file = "C:/Users/ainet/Desktop/Timothy/Data Visualization/sales_06_FY2020-21.csv"
+file = "https://raw.githubusercontent.com/TimothyBAine/customer_dashboard/main/sales_06_FY2020-21.csv"
 df = load_data(file)
 
 states = df['State'].unique()
