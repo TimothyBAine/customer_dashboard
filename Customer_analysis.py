@@ -4,11 +4,24 @@ import altair as alt
 import numpy as np 
 import pydeck as pdk 
 import datetime
+import base64
+
 
 # SETTING PAGE CONFIG TO WIDE MODE AND ADDING A TITLE AND FAVICON
 st.set_page_config(layout="wide", page_title="Customer Analysis", page_icon=":dollar:")
 
 pd.options.display.float_format = '{:, .2f}'.format
+
+
+def create_onedrive_directdownload (onedrive_link):
+    data_bytes64 = base64.b64encode(bytes(onedrive_link, 'utf-8'))
+    data_bytes64_String = data_bytes64.decode('utf-8').replace('/','_').replace('+','-').rstrip("=")
+    resultUrl = f"https://api.onedrive.com/v1.0/shares/u!{data_bytes64_String}/root/content"
+    return resultUrl
+
+onedrive_link = "https://1drv.ms/u/s!AnDLKvpXdxy1hyLIPqlhRPWJdpex?e=3wPNei"
+
+file = create_onedrive_directdownload (onedrive_link)
 
 # Loading the data
 @st.cache
@@ -115,8 +128,6 @@ def age_band(data, slider, states):
 
     return chart
 
-
-file = "https://raw.githubusercontent.com/TimothyBAine/customer_dashboard/main/sales_06_FY2020-21.csv"
 df = load_data(file)
 
 states = df['State'].unique()
